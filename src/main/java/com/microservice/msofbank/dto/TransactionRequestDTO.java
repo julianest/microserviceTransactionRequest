@@ -9,7 +9,6 @@ import org.springframework.data.annotation.Id;
 @ToString
 public class TransactionRequestDTO {
 
-    @Id
     private String id;
     private double amount;
     private TypeTransaction typeTransaction;
