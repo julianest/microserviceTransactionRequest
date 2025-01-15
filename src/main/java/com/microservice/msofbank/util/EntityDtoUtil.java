@@ -14,7 +14,7 @@ public class EntityDtoUtil {
 
     public static TransactionRequest toEntity(TransactionRequestDTO transactionRequestDTO){
         TransactionRequest transactionRequest = new TransactionRequest();
-        BeanUtils.copyProperties(transactionRequest, transactionRequestDTO);
+        BeanUtils.copyProperties(transactionRequestDTO, transactionRequest);
         return transactionRequest;
     }
 }

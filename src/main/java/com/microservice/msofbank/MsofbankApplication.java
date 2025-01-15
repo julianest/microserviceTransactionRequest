@@ -9,7 +9,7 @@ public class MsofbankApplication {
 	public static void main(String[] args) {
 
 		SpringApplication.run(MsofbankApplication.class, args);
-		System.out.println("hola");
+		System.out.println("MsofbankApplication levantado con exito");
 	}
 
 }
