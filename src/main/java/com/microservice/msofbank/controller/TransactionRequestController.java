@@ -22,7 +22,7 @@ public class TransactionRequestController {
         return this.transactionRequestService.getAll();
     }
 
-    @GetMapping("/{id")
+    @GetMapping("/{id}")
     public Mono<ResponseEntity<TransactionRequestDTO>> getTransactionById(@PathVariable String id){
         return this.transactionRequestService.getTransactionRequestById(id)
                 .map(ResponseEntity::ok)
@@ -34,14 +34,14 @@ public class TransactionRequestController {
         return this.transactionRequestService.insertTransaction(transactionRequestDTO);
     }
 
-    @PutMapping("/{id")
+    @PutMapping("/{id}")
     public Mono<ResponseEntity<TransactionRequestDTO>> updateTransaction(@PathVariable String id, @RequestBody Mono<TransactionRequestDTO> transactionRequestDTO){
         return this.transactionRequestService.updateTransaction(id, transactionRequestDTO)
                 .map(ResponseEntity::ok)
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
-
+    @DeleteMapping("/{id}")
     public Mono<Void> deleteTransaction(@PathVariable String id){
         return this.transactionRequestService.deleteTransaction(id);
     }

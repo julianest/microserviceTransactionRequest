@@ -6,7 +6,6 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 
 @Data
-@ToString
 public class TransactionRequestDTO {
 
     private String id;
