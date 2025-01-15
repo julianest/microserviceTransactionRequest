@@ -3,15 +3,23 @@ package com.microservice.msofbank.dto;
 import com.microservice.msofbank.util.TypeAccount;
 import com.microservice.msofbank.util.TypeTransaction;
 import lombok.*;
-import org.springframework.data.annotation.Id;
+
+import java.time.LocalDateTime;
+
 
 @Data
 public class TransactionRequestDTO {
 
     private String id;
+    private String numberAccount;
     private double amount;
+    //private double finalBalance;
     private TypeTransaction typeTransaction;
     private TypeAccount typeAccount;
+    private LocalDateTime createdAt;
+    private String createdBy;
+    private LocalDateTime updatedAt;
+    private String updatedBy;
 
 }
 
