@@ -2,6 +2,9 @@ package com.microservice.msofbank.controller;
 
 import com.microservice.msofbank.dto.TransactionRequestDTO;
 import com.microservice.msofbank.service.TransactionRequestService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -11,10 +14,13 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/transact")
 public class TransactionRequestController {
 
-    private final TransactionRequestService transactionRequestService;
+    @Autowired
+    private TransactionRequestService transactionRequestService;
 
-    public TransactionRequestController(TransactionRequestService transactionRequestService){
-        this.transactionRequestService= transactionRequestService;
+
+    @PostMapping("/process/{numberAccount}")
+    public Mono<TransactionRequestDTO> processTransaction(@RequestHeader HttpHeaders headers, @PathVariable String numberAccount, @RequestBody Mono<TransactionRequestDTO> transactionRequestDTO) {
+        return transactionRequestService.processTransaction(headers, numberAccount, transactionRequestDTO);
     }
 
     @GetMapping("/all")
@@ -30,6 +36,7 @@ public class TransactionRequestController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Mono<TransactionRequestDTO> insertTransaction(@RequestBody Mono<TransactionRequestDTO> transactionRequestDTO){
         return this.transactionRequestService.insertTransaction(transactionRequestDTO);
     }
