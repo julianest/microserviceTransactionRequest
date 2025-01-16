@@ -8,10 +8,13 @@ import java.time.LocalDateTime;
 
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class TransactionRequestDTO {
 
     private String id;
     private String numberAccount;
+    private double balance;
     private double amount;
     //private double finalBalance;
     private TypeTransaction typeTransaction;

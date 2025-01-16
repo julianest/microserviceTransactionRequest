@@ -1,66 +1,22 @@
-/*package com.microservice.msofbank.entity;
+package com.microservice.msofbank.entity;
+import com.microservice.msofbank.util.TypeAccount;
+import lombok.*;
 
-import com.jhsoft.SofBank.utils.enums.TypeAccount;
-import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
-@Inheritance(strategy = InheritanceType.JOINED)
-@Entity
-@Table(name = "BankAccount")
-@Getter
-@Setter
-@NoArgsConstructor
+//Mapeo de la clase BankAccount de la aplicacion.
+@Data
 public class BankAccount {
 
-    public BankAccount(String numberAccount, double initialbalance, TypeAccount typeAccount ){
-        this.numberAccount = numberAccount;
-        this.balance = initialbalance;
-        this.typeAccount = typeAccount;
-    }
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idBankAccount;
-
-    @Column(nullable = false, unique = true, length = 20)
     private String numberAccount;
-
-    @Column(nullable = false, length = 10)
-    @Setter(AccessLevel.NONE)
-    @Enumerated(EnumType.STRING)
     private TypeAccount typeAccount;
-
-    @Column(nullable = false)
     private double balance;
-
-    @Column(nullable = false)
     private double interestAccumulated;
-
-    @CreationTimestamp
-    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
-
-    @Column(nullable = false, updatable = false, length = 20)
     private String createdBy;
-
-    /*@CreationTimestamp
-    @Column(nullable = false)
-    private Timestamp modifyAt;
-
-    @Column(length = 20)
-    private String modifyBy;*/
-
-  /*  @OneToMany(mappedBy = "bankAccount", cascade= CascadeType.ALL, orphanRemoval = true)
-    private List<UserBankAccountAssociation> userAssociations = new ArrayList<>();
-
+    private LocalDateTime updateAt;
+    private String updateBy;
 
 }
-*/
