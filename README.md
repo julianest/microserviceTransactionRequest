@@ -108,7 +108,7 @@ public interface TransactionRequestRepository extends ReactiveMongoRepository<Tr
 }
 ```
 ## Diagrama de clases:
-![Diagrama de clases.png](src/main/resources/Diagrama de clases.png)
+![Diagrama de clases.png](src/main/resources/Diagrama%20de%20clases.png)
 ---
 
 ## Flujo del Proyecto
@@ -124,7 +124,7 @@ public interface TransactionRequestRepository extends ReactiveMongoRepository<Tr
 3. **Aplicación Bancaria:**
     - Recibe los datos actualizados y persiste el nuevo saldo en H2.
 
-![Descripcion Flujo Aplicaciones.png](src/main/resources/Descripcion Flujo Aplicaciones.png)
+![Descripcion Flujo Aplicaciones.png](src/main/resources/Descripcion%20Flujo%20Aplicaciones.png)
 
 ---
 
