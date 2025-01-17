@@ -39,7 +39,7 @@ public class AuthService {
             return (part > 1) ? credentials : parts[part];
 
         }
-        throw new RuntimeException("Authorization header is invalid or missing username");
+        throw new RuntimeException("Authorization header es invalido o no encuentra el username");
     }
 
 

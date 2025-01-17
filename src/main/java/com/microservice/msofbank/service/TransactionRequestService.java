@@ -5,6 +5,7 @@ import com.microservice.msofbank.entity.BankAccount;
 import com.microservice.msofbank.entity.TransactionRequest;
 import com.microservice.msofbank.repository.TransactionRequestRepository;
 import com.microservice.msofbank.util.EntityDtoUtil;
+import com.microservice.msofbank.util.LoggerReactive;
 import com.microservice.msofbank.util.TypeTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
 
 @Service
 public class TransactionRequestService {
@@ -22,6 +22,9 @@ public class TransactionRequestService {
 
     @Autowired
     private AuthService authService;
+
+    @Autowired
+    private LoggerReactive loggerReactive;
 
 
     private final WebClient webClient;
@@ -56,10 +59,8 @@ public class TransactionRequestService {
                             }
                             // Persistencia en MongoDB
                             TransactionRequest transaction = new TransactionRequest();
-                            transaction.setNumberAccount(request.getNumberAccount());
-                            transaction.setBalance(account.getBalance());
-                            transaction.setAmount(request.getAmount());
-                            transaction.setTypeTransaction(request.getTypeTransaction());
+                            transaction.setNumberAccount(account.getNumberAccount()); transaction.setBalance(account.getBalance());
+                            transaction.setAmount(request.getAmount()); transaction.setTypeTransaction(request.getTypeTransaction());
                             transaction.setTypeAccount(request.getTypeAccount());
                             transaction = (transaction.getCreatedBy() == null)
                                     ? authService.addCreatedByAuditInfo(transaction, authName)
@@ -70,7 +71,7 @@ public class TransactionRequestService {
                                             saved.getId(), account.getNumberAccount(), account.getBalance(), saved.getAmount(),
                                             saved.getTypeTransaction(), saved.getTypeAccount(),
                                             saved.getCreatedAt(), saved.getCreatedBy(), saved.getUpdatedAt(), saved.getUpdatedBy())
-                                    );
+                                    ).flatMap(transactionDTO  -> loggerReactive.logInsert(TransactionRequestDTO.class, transactionDTO));
                         })
         );
     }
